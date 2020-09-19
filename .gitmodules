@@ -1,0 +1,9 @@
+[submodule "apps/base"]
+	path = apps/base
+	url = git@github.com:amritanshu-pandey/docker-base.git
+[submodule "apps/ansible"]
+	path = apps/ansible
+	url = git@github.com:amritanshu-pandey/docker-ansible.git
+[submodule "apps/nexus3"]
+	path = apps/nexus3
+	url = git@github.com:amritanshu-pandey/docker-nexus3.git

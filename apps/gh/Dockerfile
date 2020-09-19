@@ -6,4 +6,4 @@ RUN dnf install dnf-plugins-core -y && \
     dnf update -y && \
     dnf install gh -y
 
-ENTRYPOINT /usr/local/bin/gh
+ENTRYPOINT gh
