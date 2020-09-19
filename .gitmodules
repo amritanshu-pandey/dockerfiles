@@ -7,3 +7,6 @@
 [submodule "apps/nexus3"]
 	path = apps/nexus3
 	url = git@github.com:amritanshu-pandey/docker-nexus3.git
+[submodule "apps/cron"]
+	path = apps/cron
+	url = git@github.com:amritanshu-pandey/docker-cron.git
