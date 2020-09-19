@@ -1,0 +1,59 @@
+# Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+
+schedules:
+- cron: "0 0 * * *"
+  displayName: build master branch every midnight (docker tag `latest`)
+  branches:
+    include:
+    - master
+  always: true
+
+resources:
+- repo: self
+
+variables:
+  - name: tag
+    value: '$(Build.BuildId)'
+  - group: integrations
+
+stages:
+- stage: Build
+  displayName: Build image
+
+  jobs:  
+  - job: Build
+    displayName: Build
+    dependsOn: []
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+      clean: true
+    - script: ./build-all.sh
+      displayName: build docker images
+      condition: ne(variables['build.sourceBranch'], 'refs/heads/master')
+
+- stage: Build_and_publish
+  displayName: Build and publish images
+  jobs:
+  - job: deploy_to_docker_hub
+    dependsOn: []
+    displayName: Deploy image to dockerhub
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: |
+        docker login -u $(DOCKER_REPOSITORY_USER) -p $(DOCKER_REPOSITORY_SECRET)
+        ./build-and-publish.sh
+      displayName: Build and Publish latest tag
+      condition: eq(variables['build.sourceBranch'], 'refs/heads/master')

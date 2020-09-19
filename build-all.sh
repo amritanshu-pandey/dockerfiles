@@ -9,10 +9,3 @@ done
 
 echo "INFO: waiting for completion of all build jobs"
 wait
-
-for d in $(ls ./apps); do
-	echo "INFO: Pushing $d"
-	docker push "${REGISTRY}/${d}:latest" &
-done
-
-wait
