@@ -2,6 +2,6 @@ FROM fedora:latest
 LABEL MAINTAINER="Amritanshu Pandey <email@amritanshu.in>"
 
 RUN dnf update -y && \
-    dnf install jq -y
+    dnf install sxiv -y
 
-ENTRYPOINT jq
+ENTRYPOINT sxiv
