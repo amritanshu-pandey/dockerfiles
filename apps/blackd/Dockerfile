@@ -1,4 +1,4 @@
-FROM dockerproxy.xps.lan/python:3
+FROM python:3
 RUN apt update && apt dist-upgrade -y
 RUN pip install black[d]
 EXPOSE 80

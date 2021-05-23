@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Build_and_publish') {
             steps {
+	        sh 'docker login $REGISTRY -u $DOCKER_USER -p $DOCKER_PASS'
 	        sh 'bash build-and-publish.sh'
             }
         }
