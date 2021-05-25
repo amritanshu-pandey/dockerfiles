@@ -1,4 +1,7 @@
 pipeline {
+    triggers {
+	cron(env.BRANCH_NAME == 'master' ? '0 */12 * * *' : '')
+    }
     agent {
         label 'docker'
     }
